@@ -1,5 +1,5 @@
 # TIL
-today I learned
+today I learned(주말엔 쉽니다. 만약 주말에 공부를 하게되면, 월요일에 더 빠방하게 올립니다! 💆‍♂️)
 
 [2020-09-04 Github Page 만들기](2020-09/04.md)
 
