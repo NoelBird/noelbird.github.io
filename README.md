@@ -19,7 +19,9 @@ today I learned(일요일은 쉽니다 🌴)
 
 5주차
 
-pocu 아카데미 cpp 다 들음
+2020-09-29 - fast campus 올인원 AI 시작
+
+2020-09-28 - pocu 아카데미 cpp 완강
 
 
 4주차
