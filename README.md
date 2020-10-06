@@ -18,7 +18,10 @@ today I learned(일요일은 쉽니다 🌴)
 ### TIL
 
 6주차
-[2020-10-05 - shallow NN or/and gate learning(2020-10/05.md)
+
+[2020-10-06 -  MVVM 패턴](2020-10/06.md)
+
+[2020-10-05 - shallow NN or/and gate learning](2020-10/05.md)
 
 5주차
 
