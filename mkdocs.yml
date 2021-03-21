@@ -1,3 +1,20 @@
-site_name: My Docs
+site_name: noelbird techlog
 theme:
   name: material
+pages:
+  - C++ Deep Learning:
+    - intro: cpp-deep-learning/01.md
+  - spring:
+    - intro: spring/01.md
+  - daily:
+    - 2021년 3월:
+      - '2021-03-11': daily/2021-03-11.md
+      - '2021-03-11-2': daily/2021-03-11-2.md
+      - '2021-03-09': daily/2021-03-09.md
+      - '2021-03-04': daily/2021-03-04.md
+      - '2021-03-01': daily/2021-03-01.md
+    - 2021년 2월:
+      - '2021-02-22': daily/2021-02-22.md
+      - '2021-02-21': daily/2021-02-21.md
+    
+    
