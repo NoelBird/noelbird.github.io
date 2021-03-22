@@ -22,6 +22,7 @@ extra_javascript:
 nav:
   - C++ Deep Learning:
     - intro: cpp-deep-learning/01.md
+    - 'day1: 이미지 load & show': cpp-deep-learning/02.md
   - spring:
     - intro: spring/01.md
   - whoami: whoami/aboutme.md
