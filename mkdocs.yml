@@ -6,6 +6,7 @@ pages:
     - intro: cpp-deep-learning/01.md
   - spring:
     - intro: spring/01.md
+  - whoami: whoami/aboutme.md
   - daily:
     - 2021년 3월:
       - '2021-03-11': daily/2021-03-11.md
