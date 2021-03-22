@@ -1,7 +1,25 @@
 site_name: noelbird techlog
 theme:
   name: material
-pages:
+markdown_extensions:
+  - pymdownx.tabbed
+  - pymdownx.highlight
+  - pymdownx.superfences
+  - pymdownx.inlinehilite
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - pymdownx.highlight:
+      linenums: true
+      linenums_style: pymdownx.inline
+      
+extra_css:
+  - https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/default.min.css # highlight
+extra_javascript:
+  - javascripts/config.js # common configuration
+  - https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js # highlight
+  - https://polyfill.io/v3/polyfill.min.js?features=es6 # for mathjax
+  - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js # for mathjax
+nav:
   - C++ Deep Learning:
     - intro: cpp-deep-learning/01.md
   - spring:
@@ -9,13 +27,14 @@ pages:
   - whoami: whoami/aboutme.md
   - daily:
     - 2021년 3월:
-      - '2021-03-11': daily/2021-03-11.md
-      - '2021-03-11-2': daily/2021-03-11-2.md
-      - '2021-03-09': daily/2021-03-09.md
-      - '2021-03-04': daily/2021-03-04.md
-      - '2021-03-01': daily/2021-03-01.md
+      - '2021-03-22': 'daily/2021-03-22.md'
+      - '2021-03-11': 'daily/2021-03-11.md'
+      - '2021-03-11-2': 'daily/2021-03-11-2.md'
+      - '2021-03-09': 'daily/2021-03-09.md'
+      - '2021-03-04': 'daily/2021-03-04.md'
+      - '2021-03-01': 'daily/2021-03-01.md'
     - 2021년 2월:
-      - '2021-02-22': daily/2021-02-22.md
-      - '2021-02-21': daily/2021-02-21.md
+      - '2021-02-22': 'daily/2021-02-22.md'
+      - '2021-02-21': 'daily/2021-02-21.md'
     
     
