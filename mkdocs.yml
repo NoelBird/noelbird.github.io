@@ -23,6 +23,7 @@ nav:
   - C++ Deep Learning:
     - intro: cpp-deep-learning/01.md
     - 'day1: 이미지 load & show': cpp-deep-learning/02.md
+    - 'day2: 화소 영역 처리 중 rotate & convolve': cpp-deep-learning/03.md
   - spring:
     - intro: spring/01.md
   - whoami: whoami/aboutme.md
