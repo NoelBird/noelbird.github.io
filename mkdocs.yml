@@ -32,6 +32,7 @@ nav:
   - whoami: whoami/aboutme.md
   - 꿀팁:
     - 'github multi-user': 'honeytip/github-multiuser-one-pc.md'
+    - 'books': 'honeytip/books.md'
   - daily:
     - 2021년 4월:
       - '2021-04-19': 'daily/2021-04-19.md'
