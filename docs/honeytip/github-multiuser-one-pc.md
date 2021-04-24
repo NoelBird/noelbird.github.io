@@ -1,5 +1,9 @@
 # 한 컴퓨터에서 여러 개의 github 계정을 사용하는 방법
 
+## 1. github 계정 접근 권한
+
+
+
 회사를 다니시는 분들은 개인 계정과 회사 계정을 혼합해서 사용하고 계신 분들이 많을 것 같습니다.
 
 제가 찾은 방법은 다음과 같습니다.
@@ -18,3 +22,27 @@
 
 https://zzpanqing.github.io/2017/02/28/github-push-without-username-and-password.html
 https://mygumi.tistory.com/96
+
+
+
+## 2. local의 github 계정 정보 변경
+
+위의 정보들로 변경하면 github에 업로드는 되지만, 다른 계정 이름으로 올라가게 되면
+
+github에 잔디가 안 찍힙니다...
+
+
+
+```bash
+git config --unset-all user.name 
+git config --unset-all user.email
+
+# global
+git config --unset-all --global user.name
+git config --unset-all --global user.email
+```
+
+
+
+
+
