@@ -1,5 +1,10 @@
 # NoelBird
 
+코딩을 즐김
+
+
+
 portfolio site: http://noelbird.kr
 
-mkdocs reference: https://squidfunk.github.io/mkdocs-material/
+github: http://github.com/NoelBird
+

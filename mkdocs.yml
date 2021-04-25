@@ -12,6 +12,7 @@ markdown_extensions:
       linenums: true
       linenums_style: pymdownx.inline
       
+
 extra_css:
   - https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/default.min.css # highlight
 extra_javascript:
@@ -29,10 +30,12 @@ nav:
     - 'day5: backpropage & done first commit': cpp-deep-learning/06.md
   - spring:
     - intro: spring/01.md
-  - whoami: whoami/aboutme.md
   - 꿀팁:
     - 'github multi-user': 'honeytip/github-multiuser-one-pc.md'
     - 'books': 'honeytip/books.md'
+    
+- whoami: whoami/aboutme.md
+
   - daily:
     - 2021년 4월:
       - '2021-04-24': 'daily/2021-04-24.md'
