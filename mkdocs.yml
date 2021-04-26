@@ -30,6 +30,7 @@ nav:
     - 'day5: backpropage & done first commit': cpp-deep-learning/06.md
   - OS making:
     - 'day1: bootstrap 만들기': os-making/01.md
+    - 'day2: bootloader 만들기': os-making/02.md
   - spring:
     - intro: spring/01.md
   - 꿀팁:
