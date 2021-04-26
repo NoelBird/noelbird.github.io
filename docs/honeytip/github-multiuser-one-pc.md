@@ -42,7 +42,3 @@ git config --unset-all --global user.name
 git config --unset-all --global user.email
 ```
 
-
-
-
-
