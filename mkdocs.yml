@@ -31,6 +31,7 @@ nav:
   - OS making:
     - 'day1: bootstrap 만들기': os-making/01.md
     - 'day2: bootloader 만들기': os-making/02.md
+    - 'day3: protected mode 진입': os-making/03.md
   - spring:
     - intro: spring/01.md
   - 꿀팁:
