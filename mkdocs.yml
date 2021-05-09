@@ -29,9 +29,11 @@ nav:
     - 'day4: fully-connected layer & network': cpp-deep-learning/05.md
     - 'day5: backpropage & done first commit': cpp-deep-learning/06.md
   - OS making:
+    - 'index': os-making/index.md
     - 'day1: bootstrap 만들기': os-making/01.md
     - 'day2: bootloader 만들기': os-making/02.md
     - 'day3: protected mode 진입': os-making/03.md
+    - 'day4: protected mode 진입(2)': os-making/04.md
   - spring:
     - intro: spring/01.md
   - 꿀팁:
