@@ -34,6 +34,7 @@ nav:
     - 'day2: bootloader 만들기': os-making/02.md
     - 'day3: protected mode 진입': os-making/03.md
     - 'day4: protected mode 진입(2)': os-making/04.md
+    - 'day5: 인터럽트와 예외': os-making/05.md
   - spring:
     - intro: spring/01.md
   - 꿀팁:

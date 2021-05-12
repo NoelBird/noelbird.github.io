@@ -12,6 +12,8 @@
 
 ### [day 04: protected mode 진입(2)](04.md)
 
+### [day 05: 인터럽트와 예외](05.md)
+
 
 
 ## reference
