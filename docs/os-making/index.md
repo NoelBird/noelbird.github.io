@@ -24,3 +24,4 @@ linux kernel git: https://github.com/torvalds/linux
 
 linux kernel document: https://www.kernel.org/doc/html/latest/x86/boot.html?highlight=boot
 
+linux 만들기(in osdev): http://www.osdever.net/bkerndev/Docs/intro.htm
