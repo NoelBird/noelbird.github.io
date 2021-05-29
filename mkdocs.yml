@@ -11,7 +11,7 @@ markdown_extensions:
   - pymdownx.highlight:
       linenums: true
       linenums_style: pymdownx.inline
-      
+  - attr_list
 
 extra_css:
   - https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/default.min.css # highlight
@@ -48,6 +48,7 @@ nav:
       - '03: 만들면서 배우는 OS 구조와 원리': 'honeytip/books/3.md'
     - 'linux kernel contribution guide': 'honeytip/kernel-contribution-guide.md'
     - 'javascript game making. using canvas': 'honeytip/jsgame/README.md'
+    - '후원 받기(도네리카노)': 'honeytip/donaricano.md'
     
   - whoami: whoami/aboutme.md
   - daily:
