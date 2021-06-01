@@ -35,6 +35,7 @@ nav:
     - 'day3: protected mode 진입': os-making/03.md
     - 'day4: protected mode 진입(2)': os-making/04.md
     - 'day5: 인터럽트와 예외': os-making/05.md
+    - 'day6: IDT': os-making/06.md
   - spring:
     - intro: spring/index.md
     - 'day1: spring 시작': spring/01.md
