@@ -49,6 +49,9 @@ nav:
     - 'linux kernel contribution guide': 'honeytip/kernel-contribution-guide.md'
     - 'javascript game making. using canvas': 'honeytip/jsgame/README.md'
     - '후원 받기(도네리카노)': 'honeytip/donaricano.md'
+  - nextjs:
+    - index: nextjs/index.md
+    - 'day1: Next.js / navigate between pages / assets, metadata, css': 'nextjs/01.md'
     
   - whoami: whoami/aboutme.md
   - daily:
