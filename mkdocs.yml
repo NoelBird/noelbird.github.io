@@ -37,7 +37,8 @@ nav:
     - 'day5: 인터럽트와 예외': os-making/05.md
     - 'day6: IDT': os-making/06.md
     - 'day7: PIC의 초기화': os-making/07.md
-    - 'day8: PIC의 초기화 - 설명': os-making/08.md
+    - 'day8: PIC - 설명(1)': os-making/08.md
+    - 'day9: PIC - 설명(2)': os-making/09.md
 
   - spring:
     - intro: spring/index.md
