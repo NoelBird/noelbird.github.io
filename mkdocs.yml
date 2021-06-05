@@ -36,6 +36,9 @@ nav:
     - 'day4: protected mode 진입(2)': os-making/04.md
     - 'day5: 인터럽트와 예외': os-making/05.md
     - 'day6: IDT': os-making/06.md
+    - 'day7: PIC의 초기화': os-making/07.md
+    - 'day8: PIC의 초기화 - 설명': os-making/08.md
+
   - spring:
     - intro: spring/index.md
     - 'day1: spring 시작': spring/01.md
@@ -56,8 +59,6 @@ nav:
     
   - whoami: whoami/aboutme.md
   - daily:
-    - 2021년 6월:
-      - '2021-06-02': 'daily/2021-06-02.md'
     - 2021년 5월:
       - '2021-05-27': 'daily/2021-05-27.md'
       - '2021-05-26': 'daily/2021-05-26.md'
