@@ -39,6 +39,7 @@ nav:
     - 'day7: PIC의 초기화': os-making/07.md
     - 'day8: PIC - 설명(1)': os-making/08.md
     - 'day9: PIC - 설명(2)': os-making/09.md
+    - 'day10: PIC - 타이머': os-making/10.md
 
   - spring:
     - intro: spring/index.md
