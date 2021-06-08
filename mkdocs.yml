@@ -21,13 +21,16 @@ extra_javascript:
   - https://polyfill.io/v3/polyfill.min.js?features=es6 # for mathjax
   - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js # for mathjax
 nav:
-  - C++ Deep Learning:
-    - intro: cpp-deep-learning/01.md
-    - 'day1: 이미지 load & show': cpp-deep-learning/02.md
-    - 'day2: 화소 영역 처리 중 rotate & convolve': cpp-deep-learning/03.md
-    - 'day3: convolve operator': cpp-deep-learning/04.md
-    - 'day4: fully-connected layer & network': cpp-deep-learning/05.md
-    - 'day5: backpropage & done first commit': cpp-deep-learning/06.md
+  - Deep Learning:
+    - C++ Deep Learning:
+      - intro: cpp-deep-learning/01.md
+      - 'day1: 이미지 load & show': cpp-deep-learning/02.md
+      - 'day2: 화소 영역 처리 중 rotate & convolve': cpp-deep-learning/03.md
+      - 'day3: convolve operator': cpp-deep-learning/04.md
+      - 'day4: fully-connected layer & network': cpp-deep-learning/05.md
+      - 'day5: backpropage & done first commit': cpp-deep-learning/06.md
+    - Neural Information Retrieval:
+      - overview: 'nir/overview.md'
   - OS making:
     - 'index': os-making/index.md
     - 'day1: bootstrap 만들기': os-making/01.md
