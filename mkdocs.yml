@@ -31,8 +31,8 @@ nav:
       - 'day5: backpropage & done first commit': cpp-deep-learning/06.md
     - Neural Information Retrieval:
       - overview: 'nir/overview.md'
-      - 'day1: bm25': 'nir/bm25.md'
-      - 'day2: qna bert': 'nir/qnabirt.md'
+      # - 'day1: bm25': 'nir/bm25.md'
+      # - 'day2: qna bert': 'nir/qnabirt.md'
   - OS making:
     - 'index': os-making/index.md
     - 'day1: bootstrap 만들기': os-making/01.md
@@ -45,6 +45,7 @@ nav:
     - 'day8: PIC - 설명(1)': os-making/08.md
     - 'day9: PIC - 설명(2)': os-making/09.md
     - 'day10: PIC - 타이머': os-making/10.md
+    - 'day11: interrupt/exception 마무리': os-making/11.md
 
   - spring:
     - intro: spring/index.md
