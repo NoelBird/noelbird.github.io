@@ -48,6 +48,7 @@ nav:
     - 'day11: interrupt/exception 마무리': os-making/11.md
     - 'day12: task switching': os-making/12.md
     - 'day13: task switching(2)': os-making/13.md
+    - 'day14: task switching(3)': os-making/14.md
 
   - spring:
     - intro: spring/index.md
