@@ -51,10 +51,16 @@ nav:
     - 'day14: task switching(3)': os-making/14.md
     - 'day15: task switching(4)': os-making/15.md
     - 'day16: call을 이용한 task switching': os-making/16.md
-
-  - spring:
-    - intro: spring/index.md
-    - 'day1: spring 시작': spring/01.md
+  - web:
+    - spring:
+      - intro: spring/index.md
+      - 'day1: spring 시작': spring/01.md
+    - nextjs:
+      - index: nextjs/index.md
+      - 'day1: Next.js / navigate between pages / assets, metadata, css': 'nextjs/01.md'
+    - html-canvas:
+      - index: html-canvas/index.md
+      - 'day1: canvas 사용하기': html-canvas/1.md
   - 꿀팁:
     - 'github multi-user': 'honeytip/github-multiuser-one-pc.md'
     - 'github에 이미 push된 파일 제외': 'honeytip/github-remove-added-file.md'
@@ -69,9 +75,7 @@ nav:
     - 'linux kernel contribution guide': 'honeytip/kernel-contribution-guide.md'
     - 'javascript game making. using canvas': 'honeytip/jsgame/README.md'
     - '후원 받기(도네리카노)': 'honeytip/donaricano.md'
-  - nextjs:
-    - index: nextjs/index.md
-    - 'day1: Next.js / navigate between pages / assets, metadata, css': 'nextjs/01.md'
+  
     
   - whoami: whoami/aboutme.md
   - daily:
