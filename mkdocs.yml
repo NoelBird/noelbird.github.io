@@ -55,6 +55,7 @@ nav:
     - 'day14: task switching(3)': os-making/14.md
     - 'day15: task switching(4)': os-making/15.md
     - 'day16: call을 이용한 task switching': os-making/16.md
+    - 'day17: protection': os-making/17.md
   - web:
     - spring:
       - intro: spring/index.md
