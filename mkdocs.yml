@@ -83,6 +83,7 @@ nav:
     - 'linux kernel contribution guide': 'honeytip/kernel-contribution-guide.md'
     - 'javascript game making. using canvas': 'honeytip/jsgame/README.md'
     - '후원 받기(도네리카노)': 'honeytip/donaricano.md'
+    - 'vscode에 fira font 적용': 'honeytip/fira-font.md'
     
   
     
