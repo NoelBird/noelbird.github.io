@@ -36,6 +36,10 @@
 
 ### [day16: CALL 명령에 의한 Task Switching](16.md)
 
+### [day17: 보호(2)](17.md)
+
+### [day18: 보호(3) - 콜게이트](18.md)
+
 
 
 
@@ -51,3 +55,7 @@ linux kernel git: https://github.com/torvalds/linux
 linux kernel document: https://www.kernel.org/doc/html/latest/x86/boot.html?highlight=boot
 
 linux 만들기(in osdev): http://www.osdever.net/bkerndev/Docs/intro.htm
+
+버밍엄 대학 os develop: https://www.cs.bham.ac.uk/~exr/lectures/opsys/10_11/lectures/os-dev.pdf
+
+os tutorial git: https://github.com/cfenollosa/os-tutorial
