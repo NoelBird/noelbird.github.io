@@ -62,6 +62,7 @@ nav:
     - 'day1: 렉싱': interpreter/01.md
     - 'day2': interpreter/02.md
     - 'day3': interpreter/03.md
+    - 'day4': interpreter/04.md
   - web:
     - spring:
       - intro: spring/index.md
