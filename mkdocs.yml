@@ -58,6 +58,7 @@ nav:
     - 'day17: protection': os-making/17.md
     - 'day18: protection': os-making/18.md
     - 'day19: usermode_task_switching': os-making/19.md
+    - 'day20: usermode_task_switching(2)': os-making/20.md
   - interpreter:
     - 'index': interpreter/index.md
     - 'day1: 렉싱': interpreter/01.md
