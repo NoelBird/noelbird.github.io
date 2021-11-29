@@ -90,6 +90,8 @@ nav:
       - '1: 이상한 모임': 'honeytip/reading_matters/1.md'
     - 'conference_reviews':
       - '카카오를 지탱하는 기술': 'honeytip/conference_reviews/2020_kakao_if/tech_supporting_kakao.md'
+    - 'conference_reviews2021':
+      - 'naver deview': 'honeytip/conference_reviews/2021_naver_deview/transformer_tip.md'
     - 'linux kernel contribution guide': 'honeytip/kernel-contribution-guide.md'
     - 'javascript game making. using canvas': 'honeytip/jsgame/README.md'
     - '후원 받기(도네리카노)': 'honeytip/donaricano.md'
