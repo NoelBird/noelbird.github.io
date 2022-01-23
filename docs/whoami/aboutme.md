@@ -1,10 +1,6 @@
 # NoelBird
 
-코딩을 즐김
-
-
-
-portfolio site: http://noelbird.kr
+portfolio site: http://noelbird.com
 
 github: http://github.com/NoelBird
 

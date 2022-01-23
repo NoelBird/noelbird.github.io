@@ -25,56 +25,58 @@ extra:
     provider: google
     property: G-SQ8EXBDW54
 nav:
-  - Deep Learning:
-    - C++ Deep Learning:
-      - intro: cpp-deep-learning/01.md
-      - 'day1: 이미지 load & show': cpp-deep-learning/02.md
-      - 'day2: 화소 영역 처리 중 rotate & convolve': cpp-deep-learning/03.md
-      - 'day3: convolve operator': cpp-deep-learning/04.md
-      - 'day4: fully-connected layer & network': cpp-deep-learning/05.md
-      - 'day5: backpropage & done first commit': cpp-deep-learning/06.md
+  - BASIC:
+    - OS making:
+      - 'index': os-making/index.md
+      - 'day1: bootstrap 만들기': os-making/01.md
+      - 'day2: bootloader 만들기': os-making/02.md
+      - 'day3: protected mode 진입': os-making/03.md
+      - 'day4: protected mode 진입(2)': os-making/04.md
+      - 'day5: 인터럽트와 예외': os-making/05.md
+      - 'day6: IDT': os-making/06.md
+      - 'day7: PIC의 초기화': os-making/07.md
+      - 'day8: PIC - 설명(1)': os-making/08.md
+      - 'day9: PIC - 설명(2)': os-making/09.md
+      - 'day10: PIC - 타이머': os-making/10.md
+      - 'day11: interrupt/exception 마무리': os-making/11.md
+      - 'day12: task switching': os-making/12.md
+      - 'day13: task switching(2)': os-making/13.md
+      - 'day14: task switching(3)': os-making/14.md
+      - 'day15: task switching(4)': os-making/15.md
+      - 'day16: call을 이용한 task switching': os-making/16.md
+      - 'day17: protection': os-making/17.md
+      - 'day18: protection': os-making/18.md
+      - 'day19: usermode_task_switching': os-making/19.md
+      - 'day20: usermode_task_switching(2)': os-making/20.md
+    - interpreter:
+      - 'index': interpreter/index.md
+      - 'day1: 렉싱': interpreter/01.md
+      - 'day2': interpreter/02.md
+      - 'day3': interpreter/03.md
+      - 'day4': interpreter/04.md
+  - APPLICATION:
+    - Deep Learning:
+      - C++ Deep Learning:
+        - intro: cpp-deep-learning/01.md
+        - 'day1: 이미지 load & show': cpp-deep-learning/02.md
+        - 'day2: 화소 영역 처리 중 rotate & convolve': cpp-deep-learning/03.md
+        - 'day3: convolve operator': cpp-deep-learning/04.md
+        - 'day4: fully-connected layer & network': cpp-deep-learning/05.md
+        - 'day5: backpropage & done first commit': cpp-deep-learning/06.md
     - Neural Information Retrieval:
       - overview: 'nir/overview.md'
       # - 'day1: bm25': 'nir/bm25.md'
       # - 'day2: qna bert': 'nir/qnabirt.md'
-  - OS making:
-    - 'index': os-making/index.md
-    - 'day1: bootstrap 만들기': os-making/01.md
-    - 'day2: bootloader 만들기': os-making/02.md
-    - 'day3: protected mode 진입': os-making/03.md
-    - 'day4: protected mode 진입(2)': os-making/04.md
-    - 'day5: 인터럽트와 예외': os-making/05.md
-    - 'day6: IDT': os-making/06.md
-    - 'day7: PIC의 초기화': os-making/07.md
-    - 'day8: PIC - 설명(1)': os-making/08.md
-    - 'day9: PIC - 설명(2)': os-making/09.md
-    - 'day10: PIC - 타이머': os-making/10.md
-    - 'day11: interrupt/exception 마무리': os-making/11.md
-    - 'day12: task switching': os-making/12.md
-    - 'day13: task switching(2)': os-making/13.md
-    - 'day14: task switching(3)': os-making/14.md
-    - 'day15: task switching(4)': os-making/15.md
-    - 'day16: call을 이용한 task switching': os-making/16.md
-    - 'day17: protection': os-making/17.md
-    - 'day18: protection': os-making/18.md
-    - 'day19: usermode_task_switching': os-making/19.md
-    - 'day20: usermode_task_switching(2)': os-making/20.md
-  - interpreter:
-    - 'index': interpreter/index.md
-    - 'day1: 렉싱': interpreter/01.md
-    - 'day2': interpreter/02.md
-    - 'day3': interpreter/03.md
-    - 'day4': interpreter/04.md
-  - web:
-    - spring:
-      - intro: spring/index.md
-      - 'day1: spring 시작': spring/01.md
-    - nextjs:
-      - index: nextjs/index.md
-      - 'day1: Next.js / navigate between pages / assets, metadata, css': 'nextjs/01.md'
-    - html-canvas:
-      - index: html-canvas/index.md
-      - 'day1: canvas 사용하기': html-canvas/1.md
+    - web:
+      - spring:
+        - intro: spring/index.md
+        - 'day1: spring 시작': spring/01.md
+      - nextjs:
+        - index: nextjs/index.md
+        - 'day1: Next.js / navigate between pages / assets, metadata, css': 'nextjs/01.md'
+      - html-canvas:
+        - index: html-canvas/index.md
+        - 'day1: canvas 사용하기': html-canvas/1.md
   - 꿀팁:
     - 'github multi-user': 'honeytip/github-multiuser-one-pc.md'
     - 'github에 이미 push된 파일 제외': 'honeytip/github-remove-added-file.md'
