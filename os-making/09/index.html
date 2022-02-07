@@ -1,0 +1,3764 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-8.1.10">
+    
+    
+      
+        <title>day9: PIC - 설명(2) - noelbird techlog</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.d6be258b.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.e6a45f82.min.css">
+        
+      
+    
+    
+    
+      
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/default.min.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+  
+
+
+  
+  
+
+
+  <script>function gtag(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],gtag("js",new Date),gtag("config","G-SQ8EXBDW54"),document.addEventListener("DOMContentLoaded",function(){document.forms.search&&document.forms.search.query.addEventListener("blur",function(){this.value&&gtag("event","search",{search_term:this.value})}),"undefined"!=typeof location$&&location$.subscribe(function(e){gtag("config","G-SQ8EXBDW54",{page_path:e.pathname})})})</script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-SQ8EXBDW54"></script>
+
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="none" data-md-color-accent="none">
+  
+    
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#day-09-picprogrammable-interrupt-controller-2" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="noelbird techlog" class="md-header__button md-logo" aria-label="noelbird techlog" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            noelbird techlog
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              day9: PIC - 설명(2)
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="noelbird techlog" class="md-nav__button md-logo" aria-label="noelbird techlog" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    noelbird techlog
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1" type="checkbox" id="__nav_1" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_1">
+          BASIC
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="BASIC" data-md-level="1">
+        <label class="md-nav__title" for="__nav_1">
+          <span class="md-nav__icon md-icon"></span>
+          BASIC
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1_1" type="checkbox" id="__nav_1_1" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_1_1">
+          OS making
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="OS making" data-md-level="2">
+        <label class="md-nav__title" for="__nav_1_1">
+          <span class="md-nav__icon md-icon"></span>
+          OS making
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        index
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01/" class="md-nav__link">
+        day1: bootstrap 만들기
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02/" class="md-nav__link">
+        day2: bootloader 만들기
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03/" class="md-nav__link">
+        day3: protected mode 진입
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04/" class="md-nav__link">
+        day4: protected mode 진입(2)
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../05/" class="md-nav__link">
+        day5: 인터럽트와 예외
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../06/" class="md-nav__link">
+        day6: IDT
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../07/" class="md-nav__link">
+        day7: PIC의 초기화
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../08/" class="md-nav__link">
+        day8: PIC - 설명(1)
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          day9: PIC - 설명(2)
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        day9: PIC - 설명(2)
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#day-09-picprogrammable-interrupt-controller-2" class="md-nav__link">
+    day 09: PIC(Programmable Interrupt Controller)의 설명(2)
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    변경 또는 새로 추가된 코드
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#reset-floppy-disk" class="md-nav__link">
+    reset floppy disk
+  </a>
+  
+    <nav class="md-nav" aria-label="reset floppy disk">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#pic" class="md-nav__link">
+    PIC 세팅
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    어셈블리
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    궁금한 점
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    완료
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../10/" class="md-nav__link">
+        day10: PIC - 타이머
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../11/" class="md-nav__link">
+        day11: interrupt/exception 마무리
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../12/" class="md-nav__link">
+        day12: task switching
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../13/" class="md-nav__link">
+        day13: task switching(2)
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../14/" class="md-nav__link">
+        day14: task switching(3)
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../15/" class="md-nav__link">
+        day15: task switching(4)
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../16/" class="md-nav__link">
+        day16: call을 이용한 task switching
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../17/" class="md-nav__link">
+        day17: protection
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../18/" class="md-nav__link">
+        day18: protection
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../19/" class="md-nav__link">
+        day19: usermode_task_switching
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../20/" class="md-nav__link">
+        day20: usermode_task_switching(2)
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1_2" type="checkbox" id="__nav_1_2" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_1_2">
+          interpreter
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="interpreter" data-md-level="2">
+        <label class="md-nav__title" for="__nav_1_2">
+          <span class="md-nav__icon md-icon"></span>
+          interpreter
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../interpreter/" class="md-nav__link">
+        index
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../interpreter/01/" class="md-nav__link">
+        day1: 렉싱
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../interpreter/02/" class="md-nav__link">
+        day2
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../interpreter/03.md" class="md-nav__link">
+        day3
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../interpreter/04.md" class="md-nav__link">
+        day4
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2">
+          APPLICATION
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="APPLICATION" data-md-level="1">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          APPLICATION
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_1" type="checkbox" id="__nav_2_1" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_1">
+          Deep Learning
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Deep Learning" data-md-level="2">
+        <label class="md-nav__title" for="__nav_2_1">
+          <span class="md-nav__icon md-icon"></span>
+          Deep Learning
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_1_1" type="checkbox" id="__nav_2_1_1" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_1_1">
+          C++ Deep Learning
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="C++ Deep Learning" data-md-level="3">
+        <label class="md-nav__title" for="__nav_2_1_1">
+          <span class="md-nav__icon md-icon"></span>
+          C++ Deep Learning
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cpp-deep-learning/01/" class="md-nav__link">
+        intro
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cpp-deep-learning/02/" class="md-nav__link">
+        day1: 이미지 load & show
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cpp-deep-learning/03/" class="md-nav__link">
+        day2: 화소 영역 처리 중 rotate & convolve
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cpp-deep-learning/04/" class="md-nav__link">
+        day3: convolve operator
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cpp-deep-learning/05/" class="md-nav__link">
+        day4: fully-connected layer & network
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cpp-deep-learning/06/" class="md-nav__link">
+        day5: backpropage & done first commit
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_2" type="checkbox" id="__nav_2_2" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_2">
+          Neural Information Retrieval
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Neural Information Retrieval" data-md-level="2">
+        <label class="md-nav__title" for="__nav_2_2">
+          <span class="md-nav__icon md-icon"></span>
+          Neural Information Retrieval
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../nir/overview.md" class="md-nav__link">
+        overview
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_3" type="checkbox" id="__nav_2_3" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_3">
+          web
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="web" data-md-level="2">
+        <label class="md-nav__title" for="__nav_2_3">
+          <span class="md-nav__icon md-icon"></span>
+          web
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_3_1" type="checkbox" id="__nav_2_3_1" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_3_1">
+          spring
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="spring" data-md-level="3">
+        <label class="md-nav__title" for="__nav_2_3_1">
+          <span class="md-nav__icon md-icon"></span>
+          spring
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../spring/" class="md-nav__link">
+        intro
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../spring/01/" class="md-nav__link">
+        day1: spring 시작
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_3_2" type="checkbox" id="__nav_2_3_2" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_3_2">
+          nextjs
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="nextjs" data-md-level="3">
+        <label class="md-nav__title" for="__nav_2_3_2">
+          <span class="md-nav__icon md-icon"></span>
+          nextjs
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../nextjs/" class="md-nav__link">
+        index
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../nextjs/01/" class="md-nav__link">
+        day1: Next.js / navigate between pages / assets, metadata, css
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_3_3" type="checkbox" id="__nav_2_3_3" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_3_3">
+          html-canvas
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="html-canvas" data-md-level="3">
+        <label class="md-nav__title" for="__nav_2_3_3">
+          <span class="md-nav__icon md-icon"></span>
+          html-canvas
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../html-canvas/" class="md-nav__link">
+        index
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../html-canvas/1/" class="md-nav__link">
+        day1: canvas 사용하기
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3">
+          꿀팁
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="꿀팁" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          꿀팁
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../honeytip/github-multiuser-one-pc/" class="md-nav__link">
+        github multi-user
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../honeytip/github-remove-added-file/" class="md-nav__link">
+        github에 이미 push된 파일 제외
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3_3" type="checkbox" id="__nav_3_3" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3_3">
+          books
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="books" data-md-level="2">
+        <label class="md-nav__title" for="__nav_3_3">
+          <span class="md-nav__icon md-icon"></span>
+          books
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../honeytip/books/" class="md-nav__link">
+        index
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../honeytip/books/1/" class="md-nav__link">
+        1: 프런트엔드 개발자 시작하기
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../honeytip/books/2/" class="md-nav__link">
+        2: 밑바닥부터 시작하는 딥러닝 
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../honeytip/books/3/" class="md-nav__link">
+        3: 만들면서 배우는 OS 구조와 원리
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../honeytip/books/4/" class="md-nav__link">
+        4: 파이썬 웹 프로그래밍
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../honeytip/books/5.md" class="md-nav__link">
+        5: 컨테이너 인프라 환경 구축을 위한 쿠버네티스 도커
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../honeytip/books/6/" class="md-nav__link">
+        6: 넷플릭스: 규칙없음
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3_4" type="checkbox" id="__nav_3_4" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3_4">
+          reading matters
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="reading matters" data-md-level="2">
+        <label class="md-nav__title" for="__nav_3_4">
+          <span class="md-nav__icon md-icon"></span>
+          reading matters
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../honeytip/reading_matters/" class="md-nav__link">
+        index
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../honeytip/reading_matters/1/" class="md-nav__link">
+        1: 이상한 모임
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3_5" type="checkbox" id="__nav_3_5" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3_5">
+          conference_reviews
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="conference_reviews" data-md-level="2">
+        <label class="md-nav__title" for="__nav_3_5">
+          <span class="md-nav__icon md-icon"></span>
+          conference_reviews
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../honeytip/conference_reviews/2020_kakao_if/tech_supporting_kakao/" class="md-nav__link">
+        카카오를 지탱하는 기술
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3_6" type="checkbox" id="__nav_3_6" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3_6">
+          conference_reviews2021
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="conference_reviews2021" data-md-level="2">
+        <label class="md-nav__title" for="__nav_3_6">
+          <span class="md-nav__icon md-icon"></span>
+          conference_reviews2021
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../honeytip/conference_reviews/2021_naver_deview/transformer_tip.md" class="md-nav__link">
+        naver deview
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../honeytip/kernel-contribution-guide/" class="md-nav__link">
+        linux kernel contribution guide
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../honeytip/jsgame/" class="md-nav__link">
+        javascript game making. using canvas
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../honeytip/donaricano/" class="md-nav__link">
+        후원 받기(도네리카노)
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../honeytip/fira-font/" class="md-nav__link">
+        vscode에 fira font 적용
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4">
+          회고
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="회고" data-md-level="1">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          회고
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../self-feedback/2021/" class="md-nav__link">
+        2021
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../whoami/aboutme/" class="md-nav__link">
+        whoami
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_6" type="checkbox" id="__nav_6" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_6">
+          daily
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="daily" data-md-level="1">
+        <label class="md-nav__title" for="__nav_6">
+          <span class="md-nav__icon md-icon"></span>
+          daily
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_6_1" type="checkbox" id="__nav_6_1" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_6_1">
+          2022년 1월
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="2022년 1월" data-md-level="2">
+        <label class="md-nav__title" for="__nav_6_1">
+          <span class="md-nav__icon md-icon"></span>
+          2022년 1월
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../daily/2022-01-03.md" class="md-nav__link">
+        2022-01-03
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_6_2" type="checkbox" id="__nav_6_2" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_6_2">
+          2021년 11월
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="2021년 11월" data-md-level="2">
+        <label class="md-nav__title" for="__nav_6_2">
+          <span class="md-nav__icon md-icon"></span>
+          2021년 11월
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../daily/2021-11-26.md" class="md-nav__link">
+        2021-11-26
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_6_3" type="checkbox" id="__nav_6_3" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_6_3">
+          2021년 9월
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="2021년 9월" data-md-level="2">
+        <label class="md-nav__title" for="__nav_6_3">
+          <span class="md-nav__icon md-icon"></span>
+          2021년 9월
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../daily/2021-10-31/" class="md-nav__link">
+        2021-10-31
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../daily/2021-10-18.md" class="md-nav__link">
+        2021-10-18
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../daily/2021-10-15/" class="md-nav__link">
+        2021-10-15
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../daily/2021-10-10/" class="md-nav__link">
+        2021-10-10
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../daily/2021-10-04/" class="md-nav__link">
+        2021-10-04
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../daily/2021-10-03/" class="md-nav__link">
+        2021-10-03
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../daily/2021-10-02.md" class="md-nav__link">
+        2021-10-02
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../daily/2021-09-19.md" class="md-nav__link">
+        2021-09-19
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../daily/2021-09-18.md" class="md-nav__link">
+        2021-09-18
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../daily/2021-09-04/" class="md-nav__link">
+        2021-09-04
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_6_4" type="checkbox" id="__nav_6_4" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_6_4">
+          2021년 8월
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="2021년 8월" data-md-level="2">
+        <label class="md-nav__title" for="__nav_6_4">
+          <span class="md-nav__icon md-icon"></span>
+          2021년 8월
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../daily/2021-08-28.md" class="md-nav__link">
+        2021-08-28
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../daily/2021-08-27.md" class="md-nav__link">
+        2021-08-27
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../daily/2021-08-25/" class="md-nav__link">
+        2021-08-25
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../daily/2021-08-11/" class="md-nav__link">
+        2021-08-11
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../daily/2021-08-09/" class="md-nav__link">
+        2021-08-09
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../daily/2021-08-05/" class="md-nav__link">
+        2021-08-05
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../daily/2021-08-03/" class="md-nav__link">
+        2021-08-03
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../daily/2021-08-02/" class="md-nav__link">
+        2021-08-02
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../daily/2021-08-01/" class="md-nav__link">
+        2021-08-01
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_6_5" type="checkbox" id="__nav_6_5" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_6_5">
+          2021년 7월
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="2021년 7월" data-md-level="2">
+        <label class="md-nav__title" for="__nav_6_5">
+          <span class="md-nav__icon md-icon"></span>
+          2021년 7월
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../daily/2021-07-30/" class="md-nav__link">
+        2021-07-30
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../daily/2021-07-28/" class="md-nav__link">
+        2021-07-28
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../daily/2021-07-27/" class="md-nav__link">
+        2021-07-27
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../daily/2021-07-26.md" class="md-nav__link">
+        2021-07-26
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../daily/2021-07-25/" class="md-nav__link">
+        2021-07-25
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../daily/2021-07-24/" class="md-nav__link">
+        2021-07-24
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../daily/2021-07-23/" class="md-nav__link">
+        2021-07-23
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../daily/2021-07-22/" class="md-nav__link">
+        2021-07-22
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../daily/2021-07-20/" class="md-nav__link">
+        2021-07-20
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../daily/2021-07-19/" class="md-nav__link">
+        2021-07-19
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../daily/2021-07-17/" class="md-nav__link">
+        2021-07-17
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../daily/2021-07-16/" class="md-nav__link">
+        2021-07-16
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../daily/2021-07-14/" class="md-nav__link">
+        2021-07-14
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../daily/2021-07-10/" class="md-nav__link">
+        2021-07-10
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../daily/2021-07-08/" class="md-nav__link">
+        2021-07-08
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../daily/2021-07-06/" class="md-nav__link">
+        2021-07-06
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../daily/2021-07-01/" class="md-nav__link">
+        2021-07-01
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_6_6" type="checkbox" id="__nav_6_6" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_6_6">
+          2021년 6월
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="2021년 6월" data-md-level="2">
+        <label class="md-nav__title" for="__nav_6_6">
+          <span class="md-nav__icon md-icon"></span>
+          2021년 6월
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../daily/2021-06-30/" class="md-nav__link">
+        2021-06-30
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../daily/2021-06-29/" class="md-nav__link">
+        2021-06-29
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../daily/2021-06-26/" class="md-nav__link">
+        2021-06-26
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../daily/2021-06-24/" class="md-nav__link">
+        2021-06-24
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../daily/2021-06-22/" class="md-nav__link">
+        2021-06-22
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../daily/2021-06-21/" class="md-nav__link">
+        2021-06-21
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../daily/2021-06-02/" class="md-nav__link">
+        2021-06-02
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_6_7" type="checkbox" id="__nav_6_7" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_6_7">
+          2021년 5월
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="2021년 5월" data-md-level="2">
+        <label class="md-nav__title" for="__nav_6_7">
+          <span class="md-nav__icon md-icon"></span>
+          2021년 5월
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../daily/2021-05-27/" class="md-nav__link">
+        2021-05-27
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../daily/2021-05-26/" class="md-nav__link">
+        2021-05-26
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../daily/2021-05-25/" class="md-nav__link">
+        2021-05-25
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../daily/2021-05-24/" class="md-nav__link">
+        2021-05-24
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../daily/2021-05-21/" class="md-nav__link">
+        2021-05-21
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../daily/2021-05-19/" class="md-nav__link">
+        2021-05-19
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../daily/2021-05-18/" class="md-nav__link">
+        2021-05-18
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../daily/2021-05-17/" class="md-nav__link">
+        2021-05-17
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../daily/2021-05-16/" class="md-nav__link">
+        2021-05-16
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../daily/2021-05-15/" class="md-nav__link">
+        2021-05-15
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../daily/2021-05-14/" class="md-nav__link">
+        2021-05-14
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../daily/2021-05-13/" class="md-nav__link">
+        2021-05-13
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../daily/2021-05-12/" class="md-nav__link">
+        2021-05-12
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../daily/2021-05-11/" class="md-nav__link">
+        2021-05-11
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../daily/2021-05-10/" class="md-nav__link">
+        2021-05-10
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../daily/2021-05-09/" class="md-nav__link">
+        2021-05-09
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../daily/2021-05-06/" class="md-nav__link">
+        2021-05-06
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../daily/2021-05-04/" class="md-nav__link">
+        2021-05-04
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../daily/2021-05-03/" class="md-nav__link">
+        2021-05-03
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../daily/2021-05-02/" class="md-nav__link">
+        2021-05-02
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../daily/2021-05-01/" class="md-nav__link">
+        2021-05-01
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_6_8" type="checkbox" id="__nav_6_8" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_6_8">
+          2021년 4월
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="2021년 4월" data-md-level="2">
+        <label class="md-nav__title" for="__nav_6_8">
+          <span class="md-nav__icon md-icon"></span>
+          2021년 4월
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../daily/2021-04-30/" class="md-nav__link">
+        2021-04-30
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../daily/2021-04-29/" class="md-nav__link">
+        2021-04-29
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../daily/2021-04-28/" class="md-nav__link">
+        2021-04-28
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../daily/2021-04-27/" class="md-nav__link">
+        2021-04-27
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../daily/2021-04-24/" class="md-nav__link">
+        2021-04-24
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../daily/2021-04-23/" class="md-nav__link">
+        2021-04-23
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../daily/2021-04-19/" class="md-nav__link">
+        2021-04-19
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../daily/2021-04-18/" class="md-nav__link">
+        2021-04-18
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../daily/2021-04-17/" class="md-nav__link">
+        2021-04-17
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../daily/2021-04-16/" class="md-nav__link">
+        2021-04-16
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../daily/2021-04-15/" class="md-nav__link">
+        2021-04-15
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../daily/2021-04-14/" class="md-nav__link">
+        2021-04-14
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../daily/2021-04-10/" class="md-nav__link">
+        2021-04-10
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../daily/2021-04-09/" class="md-nav__link">
+        2021-04-09
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../daily/2021-04-08/" class="md-nav__link">
+        2021-04-08
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../daily/2021-04-07/" class="md-nav__link">
+        2021-04-07
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../daily/2021-04-06/" class="md-nav__link">
+        2021-04-06
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_6_9" type="checkbox" id="__nav_6_9" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_6_9">
+          2021년 3월
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="2021년 3월" data-md-level="2">
+        <label class="md-nav__title" for="__nav_6_9">
+          <span class="md-nav__icon md-icon"></span>
+          2021년 3월
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../daily/2021-03-29/" class="md-nav__link">
+        2021-03-29
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../daily/2021-03-28/" class="md-nav__link">
+        2021-03-28
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../daily/2021-03-24/" class="md-nav__link">
+        2021-03-24
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../daily/2021-03-22/" class="md-nav__link">
+        2021-03-22
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../daily/2021-03-11/" class="md-nav__link">
+        2021-03-11
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../daily/2021-03-11-2/" class="md-nav__link">
+        2021-03-11-2
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../daily/2021-03-09/" class="md-nav__link">
+        2021-03-09
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../daily/2021-03-04/" class="md-nav__link">
+        2021-03-04
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../daily/2021-03-01/" class="md-nav__link">
+        2021-03-01
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_6_10" type="checkbox" id="__nav_6_10" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_6_10">
+          2021년 2월
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="2021년 2월" data-md-level="2">
+        <label class="md-nav__title" for="__nav_6_10">
+          <span class="md-nav__icon md-icon"></span>
+          2021년 2월
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../daily/2021-02-22/" class="md-nav__link">
+        2021-02-22
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../daily/2021-02-21/" class="md-nav__link">
+        2021-02-21
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#day-09-picprogrammable-interrupt-controller-2" class="md-nav__link">
+    day 09: PIC(Programmable Interrupt Controller)의 설명(2)
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    변경 또는 새로 추가된 코드
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#reset-floppy-disk" class="md-nav__link">
+    reset floppy disk
+  </a>
+  
+    <nav class="md-nav" aria-label="reset floppy disk">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#pic" class="md-nav__link">
+    PIC 세팅
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    어셈블리
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    궁금한 점
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    완료
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+
+  <h1>day9: PIC - 설명(2)</h1>
+
+<h2 id="day-09-picprogrammable-interrupt-controller-2">day 09: PIC(Programmable Interrupt Controller)의 설명(2)</h2>
+<p>day 08의 소스코드를 기준으로 설명합니다.</p>
+<h2 id="_1">변경 또는 새로 추가된 코드</h2>
+<h2 id="reset-floppy-disk">reset floppy disk</h2>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span>
+<span class="normal">8</span>
+<span class="normal">9</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>; src/boot.asm
+
+...
+
+reset:          ; 플로피 디스크를 리셋(controller에서 reset flag를 clear로 세팅하고, 헤드를 track 0로 가져 가는 것)
+    mov ax, 0
+    mov dl, 0   ; drive=0 A:
+    int 13h
+    jc reset    ; 에러가 나면 다시 합니다.
+</code></pre></div>
+</td></tr></table>
+<ul>
+<li>
+<p>트랙이란...?</p>
+</li>
+<li>
+<p>cylinder =&gt; track =&gt; sector 순으로 차원이 작아짐</p>
+</li>
+</ul>
+<p><img alt="img" src="../img/09/010edsector.png" /></p>
+<ul>
+<li>그림 출처: https://m.blog.naver.com/PostView.naver?isHttpsRedirect=true&amp;blogId=capemay&amp;logNo=220221154613</li>
+</ul>
+<h3 id="pic">PIC 세팅</h3>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span>
+<span class="normal">32</span>
+<span class="normal">33</span>
+<span class="normal">34</span>
+<span class="normal">35</span>
+<span class="normal">36</span>
+<span class="normal">37</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>cli         ; clear inturrpt flag. 즉, 인터럽트를 받지 않을 것을 의미
+
+; ICW1 명령어 - 초기화
+mov al, 0x11    ; PIC의 초기화(0b00010001) - 4번째 비트는 1로 고정인 값, 0번째 비트는 ICW4 명령어가 필요하다는 의미입니다.
+out 0x20, al        ; 마스터 PIC
+dw 0x00eb, 0x00eb   ; jmp $+2, jmp $+2 =&gt; 단순히 다음 명령어로 가기 전에 시간을 충분히 주자는 의미. 
+out 0xA0, al        ; 슬레이브 PIC
+dw 0x00eb, 0x00eb
+
+; ICW2 명령어 - IRQ 번호 리매핑(remapping)
+mov al, 0x20        ; 마스터 PIC 인터럽트 시작점(CPU에 +0x20을 해서 IRQ번호를 매김)
+out 0x21, al
+dw 0x00eb, 0x00eb
+mov al, 0x28        ; 슬레이브 PIC 인터럽트 시작점(CPU에 +0x28을 해서 IRQ번호를 매김)
+out 0xA1, al
+dw 0x00eb, 0x00eb
+
+; ICW3 명령어 - 마스터, 슬레이브 PIC 연결
+mov al, 0x04        ; 마스터 PIC의 IRQ 2번에
+out 0x21, al        ; 슬레이브 PIC가 연결되어 있습니다.(연결된 슬레이브 PIC가 마스터 PIC의 IRQ 7번이면 0x07 해당하는 핀의 비트를 1로 세팅하는 방식으로 함.)
+dw 0x00eb, 0x00eb
+mov al, 0x02        ; 슬레이브 PIC가 마스터 PIC의
+out 0xA1, al        ; IRQ 2번에 연결되어 있습니다.(마스터 PIC의 IRQ 7번이면 0x07 그대로 씀)
+dw 0x00eb, 0x00eb
+
+; ICW4 명령어 - 추가적인 설정(8086 모드)
+mov al, 0x01        ; 8086 모드를 사용합니다.
+out 0x21, al
+dw 0x00eb, 0x00eb
+out 0xA1, al
+dw 0x00eb, 0x00eb
+
+mov al, 0xFF        ; 슬레이브 PIC의 모든 인터럽트를
+out 0XA1, al        ; 막아둡니다.
+dw 0x00eb, 0x00eb
+mov al, 0xFB        ; 마스터 PIC의 IRQ 2번을 제외한
+out 0x21, al        ; 모든 인터럽트를 막아둡니다.
+</code></pre></div>
+</td></tr></table>
+<p>위의 명령어는 8259A라는 칩에 명령어를 내려주는 과정입니다.</p>
+<p>지금 코딩에 사용된 PIC 구조는 x86에서 master, slave PIC를 두는 방법인데,</p>
+<p>이 방법은 싱글 코어에서 사용하는 방법인 듯 합니다.</p>
+<p>멀티코어 x86에서는 APIC 방법을 사용하는 것 같습니다.</p>
+<p>arm에서는 각 회사별로 별도의 IP 블럭에서 인터럽트를 구현하는 것 같은데, ARM에서 제공하는 GIC(Generic interrupt Controller)를 사용하는 것으로 추세가 있는 듯 합니다.</p>
+<p>자세한 내용은 아래의 블로그를 참고했습니다.</p>
+<p><img alt="img" src="../img/09/interrupt-1a.png" /></p>
+<p>(참조 링크: http://jake.dothome.co.kr/ic/)</p>
+<p>위의 8259A 칩은 PIC(Programmable Controller)라고 불리며, 이 PIC도 하나의 컨트롤러의 개념을 가지고 있어서 조그마한 프로그램을 넣어 조작할 수 있습니다. 이 프로그램에는 초기화, 여러 개의 PIC 연결 방법, 인터럽트를 받아들이는 방법, 받아들인 인터럽트에 대해 CPU에게 알려주는 방법 등이 기재되어 있어야 합니다.</p>
+<ul>
+<li><strong>마스터 PIC 관련 동작</strong></li>
+</ul>
+<blockquote>
+<p>마스터 PIC에 연결된 장치 중 하나에서 인터럽트가 발생한 경우</p>
+</blockquote>
+<ul>
+<li>마스터 PIC는 자신의 INT 핀에 신호를 실어 CPU의 INT 핀에 신호를 줍니다.</li>
+<li>CPU는 이것을 받고 EFLAG 레지스터의 IE 비트가 1로 세팅되어 인터럽트를 받을 수 있는 상황이라면 /INTA를 통해 마스터 PIC에 인터럽트를 잘 받았다는 신호를 보냅니다.</li>
+<li>마스터 PIC는 /INTA 신호를 받으면 몇 번째 IRQ에 연결된 장치에서 인터럽트가 발생했는지를 숫자로 데이터 버스를 통해 CPU로 전달합니다.</li>
+<li>
+<p>CPU는 이 데이터를 참조하여 Protected Mode로 실행 중이라면 IDT에서 그 번호에 맞는 디스크립터를 찾아 인터럽트 핸들러를 실행합니다.</p>
+</li>
+<li>
+<p><strong>슬레이브 PIC 관련 동작</strong></p>
+</li>
+</ul>
+<blockquote>
+<p>슬레이브 PIC에 연결된 장치 중 하나에서 인터럽트가 발생한 경우</p>
+</blockquote>
+<ul>
+<li>슬레이브 PIC는 자신의 INT 핀에 신호를 실어 마스터 PIC의 IRQ 2번 핀에 인터럽트 신호를 보냅니다.</li>
+<li>마스터 PIC는 자신의 IRQ 핀에서 인터럽트가 발생했으므로 자신의 INT 핀에 신호를 실어 CPU에게 알립니다.</li>
+<li>
+<p>CPU가 /INTA 신호를 주면 역시 데이터 버스에 숫자를 실어 CPU에게 몇 번째 IRQ에서 인터럽트가 발생했는지를 알려줍니다. 이 경우 숫자는 8~15 사이가 될 것입니다.</p>
+</li>
+<li>
+<p>PIC의 프로그래밍</p>
+</li>
+<li>
+<p>ICW1, ICW2, ICW3, ICW4 이렇게 4가지로 구성되어 있으며, 이 순서대로 실행됩니다.</p>
+</li>
+<li>
+<p>ICW1: ICW1은 PIC를 초기화 하는 명령어입니다.</p>
+<p><img alt="image-20210606020500661" src="../img/09/image-20210606020500661.png" /></p>
+<ul>
+<li>7~4비트는 정해진 것이므로 그대로 사용합니다.</li>
+<li>LTIM은 인터럽트가 발생할 때 그 인터럽트 신호의 엣지에서 인터럽트 발생을 인정할 것인지, 혹은 HIGH LEVEL로 신호가 모두 올라간 상태에서 인터럽트 발생을 인정할 것인지를 나타냅니다. 0이면 엣지 트리거링이고, 1이면 레벨 트리거링입니다.</li>
+<li>SNGL은 이 PIC가 마스터/슬레이브로 구성되어 있는지, 마스터 한 개만 사용할지를 나타냅니다. 0 =&gt; 마스터/슬레이브 형식으로 PIC 2개 사용. 1 =&gt; 마스터 하나만 사용한다는 것을 나타냅니다.</li>
+<li>IC4는 ICW4 명령어가 추가적으로 필요한지를 나타냅니다. 0이면 필요하지 않다는 것, 1이면 필요하다는 것입니다.</li>
+</ul>
+</li>
+<li>
+<p>ICW2: 이 PIC가 인터럽트를 받았을 때 IRQ 번호에 얼마를 더해서 CPU에게 알려줄지를 지정합니다.</p>
+<p><img alt="image-20210606020821306" src="../img/09/image-20210606020821306.png" /></p>
+<ul>
+<li>0~2비트가 0인 것은 이 숫자를 8단위로 기재해야 한다는 의미입니다.</li>
+<li>예를 들어 16진수 0x10을 넣으면 나중에 인터럽트 0번이 발생했을 때 CPU에게는 0x10의 숫자를 보내줍니다. IRQ 16번이라고 알려주는 것입니다. 인터럽트 1번이 발생했을 때에는 CPU에게 0x11의 숫자를 보내줍니다.</li>
+</ul>
+</li>
+<li>
+<p>ICW3: ICW3는 각 PIC의 마스터, 슬레이브로서의 연결 방법을 나타냅니다.</p>
+<p><img alt="image-20210606021202909" src="../img/09/image-20210606021202909.png" /></p>
+<ul>
+<li>
+<p>S0~S7은 마스터 PIC의 각 IRQ 선에 해당됩니다.</p>
+</li>
+<li>
+<p>각각의 비트에 0을 넣으면 그 IRQ 선은 하드웨어 장치에 연결되어 있다는 것을 나타냅니다.</p>
+</li>
+<li>
+<p>각각의 비트 중 어느 비트에 1을 넣으면 그 IRQ 선은 슬레이브 PIC에 연결되어 있다는 것을 나타냅니다.</p>
+</li>
+</ul>
+<p><img alt="image-20210606021219962" src="../img/09/image-20210606021219962.png" /></p>
+<ul>
+<li>슬레이브 PIC에서 3~7비트는 0으로 세팅합니다. ID0~ID2의 3비트를 사용해서 슬레이브 PIC가 마스터 PIC의 몇 번째 IRQ 핀에 연결되어 있는지를 나타냅니다. 마스터 PIC에서 해당 비트를 1로 세팅하는 ICW3와는 달리 여기에서는 숫자로 나타냅니다.</li>
+</ul>
+</li>
+<li>
+<p>ICW4: ICW4는 추가 명령어입니다. ICW1 명령을 내릴 때 ICW4 추가 명령을 내리겠다는 표시를 한다면, ICW4 명령을 추가해야 합니다.</p>
+<p><img alt="image-20210606021557371" src="../img/09/image-20210606021557371.png" /></p>
+<ul>
+<li>SFNM, BUF, M/S의 기능은 현재 우리가 사용하는 PC에서는 구현되지 않아도 무방하므로 항상 0으로 해둡니다.</li>
+<li>AEOI 비트는 PIC의 Reset을 자동으로 할 지, 수동으로 할 지를 나타냅니다. PIC는 인터럽트가 발생하고 CPU에게 알린 후 리셋을 해야 그 다음부터 다른 인터럽트를 받아들일 수 있습니다. 이 리셋을 자동으로 수행하도록 한다면 CPU에게 IRQ 번호를 알린 후 바로 리셋을 합니다. 이 리셋을 수동으로 수행한다면 CPU 쪽에서 IRQ 번호를 받아들이고, 인터럽트 핸들러에서 해당 인터럽트를 처리하고 나서 PIC에 명령을 주는 형식으로 초기화를 해야 합니다.</li>
+<li>uPM 비트에 0을 넣으면 이 PIC가 MCS-80/85 모드로 움직이는 것을 의미합니다. 이 비트가 1이면 PIC가 8086 모드로 움직이는 것을 의미합니다. 우리가 사용하는 PC는 8086 계열이므로 1을 넣습니다.</li>
+</ul>
+</li>
+<li>
+<p>참고: I/O port map</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>[I/O port map]
+Master PIC Command : 0x20
+Master PIC Data : 0x21
+Slave PIC Command : 0xA0
+Slave PIC Data : 0xA1
+</code></pre></div>
+</td></tr></table>
+</li>
+</ul>
+<h2 id="_2">어셈블리</h2>
+<ul>
+<li>
+<p>복습</p>
+</li>
+<li>
+<p>org 0: 이 부분이 기억이 잘 안 났습니다. org 0는 이 프로그램이 로딩되는 메모리 상의 위치를 말합니다. 즉, 메모리 상에 프로그램이 올라갔을 때, 프로그램의 시작 주소를 특정 주소에서 시작 될 것이라고 가리키는 명령어 입니다. 즉 ip 포인터가 0부터 시작됩니다. </p>
+</li>
+<li>
+<p>https://www.csie.ntu.edu.tw/~comp03/nasm/nasmdoc6.html (6.1.1 참조)</p>
+</li>
+<li>
+<p><code>ORG</code>: The function of the <code>ORG</code> directive is to specify the origin address which NASM will assume the program begins at when it is loaded into memory.</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>[org 0]
+    jmp 07C0h:start ; 메모리의 0번 물리주소부터 시작합니다. 07C0이 코드 세그먼트이고, start의 주소는 0을 기준으로 ip가 설정됩니다.
+</code></pre></div>
+</td></tr></table>
+</li>
+<li>
+<p>새로 배운 것</p>
+</li>
+<li>
+<p>int 13h, ah 0: reset disk system: reset 플래그를 컨트롤러에서 clear 하고, 헤드를 트랙0로 가져다 둡니다.</p>
+<p><img alt="image-20210606000830261" src="../img/09/image-20210606000830261.png" /></p>
+<p>(출처: https://stanislavs.org/helppc/int_13-0.html)</p>
+</li>
+</ul>
+<h2 id="_3">궁금한 점</h2>
+<ol>
+<li>
+<p>day 08의 소스코드에서 reset label과 read label이 멀리 떨어져 있었습니다. 사실 floppy disk의 헤드를 처음으로 가져가고, read 하는 것인데 좀 더 가까이 붙어 있는 것이 좋지 않을까요?</p>
+</li>
+<li>
+<p>코드 중간에 플로피 디스크의 모터를 끄는 어셈블리 코드가 있습니다. 왜 디스크의 모터를 끄는 걸까요...?</p>
+</li>
+</ol>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>mov dx, 0x3F2
+xor al, al
+out dx, al
+</code></pre></div>
+</td></tr></table>
+<h2 id="_4">완료</h2>
+<p>p. 133 (타이머 인터럽트 핸들러 구현 전까지 완료)</p>
+
+              
+            </article>
+          </div>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    <nav class="md-footer__inner md-grid" aria-label="Footer">
+      
+        
+        <a href="../08/" class="md-footer__link md-footer__link--prev" aria-label="Previous: day8: PIC - 설명(1)" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              day8: PIC - 설명(1)
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="../10/" class="md-footer__link md-footer__link--next" aria-label="Next: day10: PIC - 타이머" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              day10: PIC - 타이머
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "../..", "features": [], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../../assets/javascripts/workers/search.092fa1f6.min.js"}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.e3b2bf44.min.js"></script>
+      
+        <script src="../../javascripts/config.js"></script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>
