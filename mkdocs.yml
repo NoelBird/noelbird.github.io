@@ -87,6 +87,7 @@ nav:
       - '3: 만들면서 배우는 OS 구조와 원리': 'honeytip/books/3.md'
       - '4: 파이썬 웹 프로그래밍': 'honeytip/books/4.md'
       - '5: 컨테이너 인프라 환경 구축을 위한 쿠버네티스 도커': 'honeytip/books/5.md'
+      - '6: 넷플릭스: 규칙없음': 'honeytip/books/6.md'
     - 'reading matters':
       - 'index': 'honeytip/reading_matters/index.md'
       - '1: 이상한 모임': 'honeytip/reading_matters/1.md'
