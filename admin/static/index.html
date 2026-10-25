@@ -1,0 +1,434 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>noelbird admin</title>
+<style>
+  :root {
+    --bg: #ffffff; --panel: #f6f7f9; --border: #dfe2e6; --text: #1f2328; --muted: #6b7280;
+    --accent: #4051b5; --accent-text: #ffffff; --danger: #c62828; --hover: #eaecf0;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #1e1f24; --panel: #25262c; --border: #3a3c44; --text: #e6e6e6; --muted: #9aa0a6;
+      --accent: #7c8ce0; --accent-text: #111; --danger: #ef6b6b; --hover: #2f3038;
+    }
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; height: 100%; background: var(--bg); color: var(--text);
+    font: 14px/1.5 -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Noto Sans KR", sans-serif; }
+  button, input, select { font: inherit; color: inherit; }
+  button { background: var(--panel); border: 1px solid var(--border); border-radius: 6px; padding: 4px 10px; cursor: pointer; }
+  button:hover { background: var(--hover); }
+  button.primary { background: var(--accent); color: var(--accent-text); border-color: var(--accent); }
+  button:disabled { opacity: .5; cursor: default; }
+  input, select { background: var(--bg); border: 1px solid var(--border); border-radius: 6px; padding: 5px 8px; width: 100%; }
+
+  .app { display: grid; grid-template-rows: auto 1fr; height: 100%; }
+  header { display: flex; align-items: center; gap: 8px; padding: 8px 12px; border-bottom: 1px solid var(--border); background: var(--panel); }
+  header h1 { font-size: 15px; margin: 0 12px 0 0; }
+  #current { color: var(--muted); font-family: ui-monospace, Menlo, monospace; font-size: 13px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  #status { margin-left: auto; color: var(--muted); font-size: 13px; white-space: nowrap; }
+  #status.error { color: var(--danger); }
+
+  main { display: grid; grid-template-columns: 260px 1fr 1fr; min-height: 0; }
+  main.no-preview { grid-template-columns: 260px 1fr 0; }
+  main.no-preview #preview-pane { display: none; }
+
+  #sidebar { border-right: 1px solid var(--border); display: flex; flex-direction: column; min-height: 0; }
+  #sidebar .search { padding: 8px; border-bottom: 1px solid var(--border); }
+  #tree { overflow: auto; padding: 4px 0 16px; font-size: 13px; }
+  #tree details > summary { cursor: pointer; padding: 2px 8px; color: var(--muted); list-style-position: inside; }
+  #tree details details { margin-left: 12px; }
+  #tree .file { display: flex; gap: 6px; align-items: center; padding: 2px 8px 2px 22px; cursor: pointer; white-space: nowrap; }
+  #tree .file:hover { background: var(--hover); }
+  #tree .file.active { background: var(--accent); color: var(--accent-text); }
+  #tree .badge { font-size: 11px; color: var(--muted); border: 1px solid var(--border); border-radius: 4px; padding: 0 4px; }
+  #tree .file.active .badge { color: inherit; border-color: currentColor; }
+
+  #editor-pane { display: flex; flex-direction: column; min-height: 0; border-right: 1px solid var(--border); }
+  .toolbar { display: flex; gap: 4px; flex-wrap: wrap; padding: 6px 8px; border-bottom: 1px solid var(--border); }
+  .toolbar .hint { margin-left: auto; color: var(--muted); font-size: 12px; align-self: center; }
+  #editor { flex: 1; width: 100%; border: 0; outline: 0; resize: none; padding: 16px; background: var(--bg); color: var(--text);
+    font: 14px/1.7 ui-monospace, Menlo, "D2Coding", monospace; tab-size: 4; }
+  #editor.dragover { background: var(--hover); }
+  #editor:disabled { background: var(--panel); }
+  #preview-pane { display: flex; flex-direction: column; min-height: 0; }
+  #preview-pane .toolbar a { color: var(--accent); font-size: 12px; align-self: center; }
+  #preview { flex: 1; border: 0; width: 100%; background: #fff; }
+  .empty { padding: 32px; color: var(--muted); }
+
+  dialog { border: 1px solid var(--border); border-radius: 10px; background: var(--bg); color: var(--text); width: min(520px, 92vw); padding: 20px; }
+  dialog::backdrop { background: rgba(0,0,0,.35); }
+  dialog h2 { margin: 0 0 12px; font-size: 16px; }
+  dialog label { display: block; margin: 10px 0 4px; font-size: 13px; color: var(--muted); }
+  dialog .row { display: flex; gap: 8px; }
+  dialog .row > * { flex: 1; }
+  dialog .actions { display: flex; justify-content: flex-end; gap: 8px; margin-top: 18px; }
+  dialog .err { color: var(--danger); font-size: 13px; min-height: 1em; margin-top: 8px; }
+</style>
+</head>
+<body>
+<div class="app">
+  <header>
+    <h1>noelbird admin</h1>
+    <button id="btn-new" class="primary">새 글</button>
+    <button id="btn-save" disabled>저장 (⌘S)</button>
+    <button id="btn-toggle-preview">미리보기 숨기기</button>
+    <span id="current"></span>
+    <span id="status"></span>
+  </header>
+  <main id="main">
+    <aside id="sidebar">
+      <div class="search"><input id="filter" placeholder="파일 검색"></div>
+      <div id="tree"></div>
+    </aside>
+    <section id="editor-pane">
+      <div class="toolbar">
+        <button data-cmd="h2" title="제목">H2</button>
+        <button data-cmd="h3" title="소제목">H3</button>
+        <button data-cmd="bold" title="굵게"><b>B</b></button>
+        <button data-cmd="italic" title="기울임"><i>I</i></button>
+        <button data-cmd="code" title="인라인 코드">`code`</button>
+        <button data-cmd="codeblock" title="코드 블록">```</button>
+        <button data-cmd="link" title="링크">링크</button>
+        <button data-cmd="image" title="그림 넣기">그림</button>
+        <span class="hint">그림은 붙여넣기 · 끌어다 놓기로도 넣을 수 있습니다</span>
+      </div>
+      <textarea id="editor" spellcheck="false" disabled placeholder="왼쪽에서 글을 고르거나 새 글을 만드세요."></textarea>
+      <input id="file-input" type="file" accept="image/*" multiple hidden>
+    </section>
+    <section id="preview-pane">
+      <div class="toolbar"><a id="preview-link" target="_blank" rel="noopener">새 탭에서 열기</a></div>
+      <iframe id="preview" title="미리보기"></iframe>
+    </section>
+  </main>
+</div>
+
+<dialog id="new-dialog">
+  <form method="dialog" id="new-form">
+    <h2>새 글</h2>
+    <label for="new-dir">폴더 (docs/ 기준, 새 폴더 이름도 입력 가능)</label>
+    <input id="new-dir" list="dir-list" placeholder="예: daily">
+    <datalist id="dir-list"></datalist>
+    <div class="row">
+      <div>
+        <label for="new-filename">파일 이름</label>
+        <input id="new-filename" required placeholder="예: 2026-10-25">
+      </div>
+      <div>
+        <label for="new-title">제목</label>
+        <input id="new-title" placeholder="글 맨 위 # 제목">
+      </div>
+    </div>
+    <div class="row">
+      <div>
+        <label for="new-section">메뉴(nav) 등록 위치</label>
+        <select id="new-section"></select>
+      </div>
+      <div>
+        <label for="new-subsection">새 하위 메뉴 (선택)</label>
+        <input id="new-subsection" placeholder="예: 2026년 10월">
+      </div>
+    </div>
+    <div class="row">
+      <div>
+        <label for="new-label">메뉴에 보일 이름</label>
+        <input id="new-label" placeholder="비우면 제목 사용">
+      </div>
+      <div>
+        <label for="new-position">순서</label>
+        <select id="new-position">
+          <option value="bottom">맨 아래</option>
+          <option value="top">맨 위 (daily 처럼 최신순)</option>
+        </select>
+      </div>
+    </div>
+    <div class="err" id="new-error"></div>
+    <div class="actions">
+      <button type="button" id="new-cancel">취소</button>
+      <button type="submit" class="primary">만들기</button>
+    </div>
+  </form>
+</dialog>
+
+<script>
+const $ = (s) => document.querySelector(s);
+const editor = $('#editor');
+let previewBase = '';
+let current = null;
+let saved = '';
+let files = [];
+let sections = [];
+
+async function api(path, opts = {}) {
+  const r = await fetch(path, opts);
+  const j = await r.json().catch(() => ({}));
+  if (!r.ok) throw new Error(j.error || `요청 실패 (${r.status})`);
+  return j;
+}
+const postJSON = (path, body) => api(path, {
+  method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body),
+});
+
+function setStatus(msg, isError = false) {
+  const el = $('#status');
+  el.textContent = msg;
+  el.classList.toggle('error', isError);
+}
+const isDirty = () => current && editor.value !== saved;
+function refreshDirty() {
+  $('#btn-save').disabled = !isDirty();
+  if (current) setStatus(isDirty() ? '저장 안 됨' : '저장됨');
+}
+
+// ---- 파일 목록 ----
+async function loadFiles() {
+  const j = await api('/api/files');
+  files = j.files;
+  $('#dir-list').innerHTML = j.dirs.filter(Boolean).map((d) => `<option value="${esc(d)}">`).join('');
+  renderTree();
+}
+function esc(s) {
+  return s.replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+}
+function renderTree() {
+  const q = $('#filter').value.trim().toLowerCase();
+  const root = { dirs: {}, files: [] };
+  for (const f of files) {
+    if (q && !f.path.toLowerCase().includes(q)) continue;
+    const parts = f.path.split('/');
+    let node = root;
+    for (const p of parts.slice(0, -1)) node = node.dirs[p] ||= { dirs: {}, files: [] };
+    node.files.push(f);
+  }
+  const openDirs = current ? current.split('/').slice(0, -1) : [];
+  const render = (node, depth, prefix) => {
+    let html = '';
+    for (const name of Object.keys(node.dirs).sort()) {
+      const path = prefix ? `${prefix}/${name}` : name;
+      const open = q || openDirs.slice(0, depth + 1).join('/') === path;
+      html += `<details${open ? ' open' : ''}><summary>${esc(name)}</summary>${render(node.dirs[name], depth + 1, path)}</details>`;
+    }
+    for (const f of node.files) {
+      const name = f.path.split('/').pop();
+      html += `<div class="file${f.path === current ? ' active' : ''}" data-path="${esc(f.path)}">`
+        + `<span>${esc(name)}</span>${f.in_nav ? '' : '<span class="badge">메뉴 없음</span>'}</div>`;
+    }
+    return html;
+  };
+  $('#tree').innerHTML = render(root, 0, '') || '<div class="empty">파일이 없습니다.</div>';
+  $('#tree .file.active')?.scrollIntoView({ block: 'nearest' });
+}
+$('#tree').addEventListener('click', (e) => {
+  const el = e.target.closest('.file');
+  if (el) openDoc(el.dataset.path);
+});
+$('#filter').addEventListener('input', renderTree);
+
+// ---- 열기 · 저장 ----
+function previewUrl(path) {
+  let p = path.replace(/\.md$/, '');
+  if (p === 'index' || p.endsWith('/index')) p = p.slice(0, -5);
+  else p += '/';
+  return `${previewBase}/${p}`.replace(/([^:])\/\/+/g, '$1/');
+}
+async function openDoc(path) {
+  if (isDirty() && !confirm('저장하지 않은 내용이 있습니다. 버리고 다른 글을 열까요?')) return;
+  try {
+    const j = await api(`/api/doc?path=${encodeURIComponent(path)}`);
+    current = path;
+    saved = editor.value = j.content;
+    editor.disabled = false;
+    $('#current').textContent = `docs/${path}`;
+    const url = previewUrl(path);
+    $('#preview').src = url;
+    $('#preview-link').href = url;
+    history.replaceState(null, '', `#${encodeURIComponent(path)}`);
+    renderTree();
+    refreshDirty();
+    editor.focus();
+  } catch (e) { setStatus(e.message, true); }
+}
+async function save() {
+  if (!isDirty()) return;
+  const content = editor.value;
+  try {
+    setStatus('저장 중…');
+    await postJSON('/api/doc', { path: current, content });
+    saved = content;
+    refreshDirty();
+  } catch (e) { setStatus(e.message, true); }
+}
+$('#btn-save').addEventListener('click', save);
+editor.addEventListener('input', refreshDirty);
+window.addEventListener('beforeunload', (e) => { if (isDirty()) e.preventDefault(); });
+
+// ---- 편집 도구 ----
+function replaceSelection(text, selectFrom = text.length, selectTo = selectFrom) {
+  const start = editor.selectionStart;
+  editor.setRangeText(text, start, editor.selectionEnd, 'end');
+  editor.setSelectionRange(start + selectFrom, start + selectTo);
+  editor.focus();
+  refreshDirty();
+}
+function wrap(before, after, placeholder) {
+  const sel = editor.value.slice(editor.selectionStart, editor.selectionEnd) || placeholder;
+  replaceSelection(before + sel + after, before.length, before.length + sel.length);
+}
+function linePrefix(prefix) {
+  const v = editor.value;
+  const lineStart = v.lastIndexOf('\n', editor.selectionStart - 1) + 1;
+  const line = v.slice(lineStart).match(/^#*\s*/)[0];
+  editor.setRangeText(prefix, lineStart, lineStart + line.length, 'end');
+  editor.focus();
+  refreshDirty();
+}
+const commands = {
+  h2: () => linePrefix('## '),
+  h3: () => linePrefix('### '),
+  bold: () => wrap('**', '**', '굵은 글씨'),
+  italic: () => wrap('*', '*', '기울인 글씨'),
+  code: () => wrap('`', '`', 'code'),
+  codeblock: () => wrap('\n```\n', '\n```\n', '코드'),
+  link: () => {
+    const sel = editor.value.slice(editor.selectionStart, editor.selectionEnd) || '링크 글자';
+    replaceSelection(`[${sel}](https://)`, sel.length + 3, sel.length + 11);
+  },
+  image: () => $('#file-input').click(),
+};
+document.querySelectorAll('[data-cmd]').forEach((b) => b.addEventListener('click', () => {
+  if (!editor.disabled) commands[b.dataset.cmd]();
+}));
+editor.addEventListener('keydown', (e) => {
+  if (e.key === 'Tab' && !e.shiftKey) { e.preventDefault(); replaceSelection('    '); }
+});
+document.addEventListener('keydown', (e) => {
+  if ((e.metaKey || e.ctrlKey) && e.key === 's') { e.preventDefault(); save(); }
+});
+
+// ---- 그림 ----
+const EXT = { 'image/png': 'png', 'image/jpeg': 'jpg', 'image/gif': 'gif', 'image/webp': 'webp', 'image/svg+xml': 'svg' };
+async function uploadImages(list) {
+  const images = [...list].filter((f) => EXT[f.type]);
+  if (!current || !images.length) {
+    if (list.length) setStatus('png · jpg · gif · webp · svg 그림만 넣을 수 있습니다.', true);
+    return;
+  }
+  for (const f of images) {
+    setStatus(`그림 올리는 중… (${f.name || '붙여넣은 그림'})`);
+    try {
+      const j = await api(`/api/upload?doc=${encodeURIComponent(current)}&ext=${EXT[f.type]}`, {
+        method: 'POST', headers: { 'Content-Type': 'application/octet-stream' }, body: f,
+      });
+      const alt = f.name && f.name !== 'image.png' ? f.name.replace(/\.[^.]+$/, '') : '';
+      replaceSelection(`![${alt}](${j.src})\n`);
+    } catch (e) { setStatus(e.message, true); return; }
+  }
+  refreshDirty();
+}
+$('#file-input').addEventListener('change', (e) => { uploadImages(e.target.files); e.target.value = ''; });
+editor.addEventListener('paste', (e) => {
+  if (e.clipboardData.files.length) { e.preventDefault(); uploadImages(e.clipboardData.files); }
+});
+editor.addEventListener('dragover', (e) => { e.preventDefault(); editor.classList.add('dragover'); });
+editor.addEventListener('dragleave', () => editor.classList.remove('dragover'));
+editor.addEventListener('drop', (e) => {
+  editor.classList.remove('dragover');
+  if (e.dataTransfer.files.length) { e.preventDefault(); editor.focus(); uploadImages(e.dataTransfer.files); }
+});
+
+// ---- 새 글 ----
+const dialog = $('#new-dialog');
+$('#btn-new').addEventListener('click', async () => {
+  try {
+    sections = (await api('/api/nav')).sections;
+  } catch (e) { setStatus(e.message, true); return; }
+  $('#new-section').innerHTML = '<option value="">등록하지 않음</option>'
+    + sections.map((s, i) => `<option value="${i}">${esc(s.path)}</option>`).join('');
+  $('#new-error').textContent = '';
+  $('#new-dir').value = current ? current.split('/').slice(0, -1).join('/') : '';
+  $('#new-filename').value = new Date().toLocaleDateString('sv-SE');
+  $('#new-title').value = '';
+  $('#new-label').value = '';
+  guessSection();
+  dialog.showModal();
+  $('#new-title').focus();
+});
+$('#new-cancel').addEventListener('click', () => dialog.close());
+function guessSection() {
+  // 같은 폴더의 가장 최근 글이 들어 있는 메뉴를 기본값으로 고르고, 그 메뉴가 최신순이면 '맨 위'로 맞춘다.
+  const dir = $('#new-dir').value.trim().replace(/\/$/, '');
+  const inDir = (p) => (dir ? p.startsWith(`${dir}/`) && !p.slice(dir.length + 1).includes('/') : !p.includes('/'));
+  let best = -1;
+  let bestPage = '';
+  sections.forEach((s, i) => s.pages.filter(inDir).forEach((p) => {
+    if (p > bestPage) { best = i; bestPage = p; }
+  }));
+  $('#new-subsection').value = '';
+  $('#new-section').value = best < 0 ? '' : String(best);
+  if (best < 0) return;
+  const p = sections[best].pages.filter((x) => inDir(x) && !x.endsWith('/index.md'));
+  $('#new-position').value = p.length > 1 && p[0] > p[p.length - 1] ? 'top' : 'bottom';
+
+  // daily 처럼 'YYYY년 M월' 메뉴로 나뉜 경우, 파일 이름의 날짜에 맞는 달 메뉴를 고르거나 새로 만든다.
+  const date = $('#new-filename').value.match(/^(\d{4})-(\d{2})-\d{2}$/);
+  const sec = sections[best];
+  if (!date || !/^\d{4}년 \d{1,2}월$/.test(sec.label)) return;
+  const month = `${date[1]}년 ${+date[2]}월`;
+  const parentPath = sec.path.slice(0, sec.path.length - sec.label.length - 3);
+  const existing = sections.findIndex((s) => s.path === `${parentPath} > ${month}`);
+  if (existing >= 0) {
+    $('#new-section').value = String(existing);
+  } else {
+    const parent = sections.findIndex((s) => s.path === parentPath);
+    if (parent < 0) return;
+    $('#new-section').value = String(parent);
+    $('#new-subsection').value = month;
+  }
+  $('#new-position').value = 'top';
+}
+$('#new-dir').addEventListener('change', guessSection);
+$('#new-filename').addEventListener('change', guessSection);
+$('#new-form').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  if (isDirty() && !confirm('저장하지 않은 내용이 있습니다. 버리고 새 글을 만들까요?')) return;
+  const idx = $('#new-section').value;
+  const sec = idx === '' ? null : sections[+idx];
+  try {
+    const j = await postJSON('/api/new', {
+      dir: $('#new-dir').value,
+      filename: $('#new-filename').value,
+      title: $('#new-title').value,
+      section_path: sec ? sec.path : '',
+      new_section: sec ? $('#new-subsection').value : '',
+      label: $('#new-label').value,
+      position: $('#new-position').value,
+    });
+    dialog.close();
+    saved = editor.value;  // 위에서 확인했으므로 이전 글의 변경은 버린다.
+    await loadFiles();
+    await openDoc(j.path);
+    // mkdocs serve 가 새 파일을 빌드할 때까지 잠시 기다렸다가 미리보기를 다시 연다.
+    setTimeout(() => { $('#preview').src = previewUrl(j.path); }, 2500);
+  } catch (err) { $('#new-error').textContent = err.message; }
+});
+
+// ---- 미리보기 토글 ----
+$('#btn-toggle-preview').addEventListener('click', () => {
+  const hidden = $('#main').classList.toggle('no-preview');
+  $('#btn-toggle-preview').textContent = hidden ? '미리보기 보이기' : '미리보기 숨기기';
+});
+
+(async () => {
+  try {
+    previewBase = (await api('/api/config')).preview;
+    await loadFiles();
+    const initial = decodeURIComponent(location.hash.slice(1));
+    if (initial && files.some((f) => f.path === initial)) openDoc(initial);
+  } catch (e) { setStatus(e.message, true); }
+})();
+</script>
+</body>
+</html>
