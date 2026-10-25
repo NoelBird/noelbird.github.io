@@ -1,0 +1,1 @@
+print("Yes") if int(input())%100 == 0 else print("No")
