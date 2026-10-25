@@ -2,7 +2,8 @@ site_name: noelbird techlog
 theme:
   name: material
 markdown_extensions:
-  - pymdownx.tabbed
+  - pymdownx.tabbed:
+      alternate_style: true
   - pymdownx.highlight
   - pymdownx.superfences
   - pymdownx.inlinehilite
